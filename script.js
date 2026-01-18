@@ -569,6 +569,7 @@ function selectAnswer(selectedIndex, question) {
 
 function nextQuestion() {
     currentQuestionIndex++;
+    document.getElementById('quizContent').style.display = 'block';
     displayQuestion();
     
     // Re-enable options
