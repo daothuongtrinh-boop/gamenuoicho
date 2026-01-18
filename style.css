@@ -488,6 +488,12 @@ h3 {
     transition: all 0.3s ease;
 }
 
+.start-btn {
+    padding: 20px;
+    font-size: 1.2em;
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
+
 .quiz-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);

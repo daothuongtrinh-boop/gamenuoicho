@@ -14,10 +14,15 @@
         <div class="quiz-section">
             <h2>🎓 Trả Lời Câu Hỏi Để Kiếm Coin</h2>
             <div class="quiz-container">
-                <div class="quiz-question" id="quizQuestion"></div>
-                <div class="quiz-options" id="quizOptions"></div>
-                <div id="quizFeedback" class="quiz-feedback"></div>
-                <button id="nextQuizBtn" class="quiz-btn" onclick="nextQuestion()" style="display: none;">Câu Tiếp Theo →</button>
+                <div id="quizStart" style="text-align: center;">
+                    <button class="quiz-btn start-btn" onclick="displayQuestion(); document.getElementById('quizStart').style.display='none';">🎮 Bắt Đầu Làm Bài Quiz</button>
+                </div>
+                <div id="quizContent" style="display: none;">
+                    <div class="quiz-question" id="quizQuestion"></div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    <div id="quizFeedback" class="quiz-feedback"></div>
+                    <button id="nextQuizBtn" class="quiz-btn" onclick="nextQuestion()" style="display: none;">Câu Tiếp Theo →</button>
+                </div>
             </div>
         </div>
         

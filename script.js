@@ -499,6 +499,9 @@ window.addEventListener('DOMContentLoaded', initGame);
 
 // Quiz Functions
 function displayQuestion() {
+    // Show quiz content
+    document.getElementById('quizContent').style.display = 'block';
+    
     // Find next unanswered question
     while (answeredQuestions.has(currentQuestionIndex) && currentQuestionIndex < quizQuestions.length) {
         currentQuestionIndex++;
