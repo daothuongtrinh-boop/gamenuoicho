@@ -184,7 +184,7 @@ function updateDisplay() {
     document.getElementById('foodCount').textContent = gameState.food;
     document.getElementById('waterCount').textContent = gameState.water;
     document.getElementById('medicineCount').textContent = gameState.medicine;
-    document.getElementById('coinCount').textContent = gameState.coins;
+    document.getElementById('coinCount').textContent = Math.round(gameState.coins);
     
     // Update dog emoji based on state
     const dogEmoji = document.getElementById('dogEmoji');
@@ -550,6 +550,7 @@ function selectAnswer(selectedIndex, question) {
         feedbackEl.textContent = `✅ Đúng rồi! +${question.reward} coin`;
         feedbackEl.className = 'quiz-feedback show correct';
         gameState.coins += question.reward;
+        console.log('Coin cập nhật:', gameState.coins, 'Thêm:', question.reward);
         updateDisplay();
         
         // Auto advance to next question after 2 seconds
