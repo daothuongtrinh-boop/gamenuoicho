@@ -1,3 +1,124 @@
+// Quiz Questions
+const quizQuestions = [
+    // Math Questions
+    {
+        question: '2 + 3 = ?',
+        options: ['4', '5', '6', '7'],
+        correct: 1,
+        reward: 10,
+        type: 'math'
+    },
+    {
+        question: '10 - 4 = ?',
+        options: ['5', '6', '7', '8'],
+        correct: 1,
+        reward: 10,
+        type: 'math'
+    },
+    {
+        question: '5 × 3 = ?',
+        options: ['12', '15', '18', '20'],
+        correct: 1,
+        reward: 15,
+        type: 'math'
+    },
+    {
+        question: '20 ÷ 4 = ?',
+        options: ['4', '5', '6', '7'],
+        correct: 1,
+        reward: 15,
+        type: 'math'
+    },
+    {
+        question: '15 + 25 = ?',
+        options: ['35', '40', '45', '50'],
+        correct: 1,
+        reward: 15,
+        type: 'math'
+    },
+    {
+        question: '100 - 30 = ?',
+        options: ['60', '65', '70', '75'],
+        correct: 0,
+        reward: 15,
+        type: 'math'
+    },
+    {
+        question: '9 × 8 = ?',
+        options: ['70', '71', '72', '73'],
+        correct: 2,
+        reward: 20,
+        type: 'math'
+    },
+    {
+        question: '144 ÷ 12 = ?',
+        options: ['10', '11', '12', '13'],
+        correct: 2,
+        reward: 20,
+        type: 'math'
+    },
+    // English Questions
+    {
+        question: 'What is the opposite of \"hot\"?',
+        options: ['warm', 'cold', 'cool', 'icy'],
+        correct: 1,
+        reward: 10,
+        type: 'english'
+    },
+    {
+        question: 'Which is the color of the sky on a clear day?',
+        options: ['red', 'blue', 'green', 'yellow'],
+        correct: 1,
+        reward: 10,
+        type: 'english'
+    },
+    {
+        question: 'How many days are in a week?',
+        options: ['5', '6', '7', '8'],
+        correct: 2,
+        reward: 10,
+        type: 'english'
+    },
+    {
+        question: 'What do you call a young dog?',
+        options: ['calf', 'puppy', 'kitten', 'chick'],
+        correct: 1,
+        reward: 15,
+        type: 'english'
+    },
+    {
+        question: 'Which animal says \"meow\"?',
+        options: ['dog', 'cat', 'cow', 'duck'],
+        correct: 1,
+        reward: 10,
+        type: 'english'
+    },
+    {
+        question: 'What is the capital of France?',
+        options: ['London', 'Berlin', 'Paris', 'Madrid'],
+        correct: 2,
+        reward: 15,
+        type: 'english'
+    },
+    {
+        question: 'How many legs does a dog have?',
+        options: ['2', '3', '4', '5'],
+        correct: 2,
+        reward: 15,
+        type: 'english'
+    },
+    {
+        question: 'What color is a banana?',
+        options: ['red', 'green', 'yellow', 'brown'],
+        correct: 2,
+        reward: 10,
+        type: 'english'
+    }
+];
+
+let currentQuestionIndex = 0;
+let answeredQuestions = new Set();
+
 // Game State
 let gameState = {
     dogName: 'Chó Của Tôi',
@@ -5,10 +126,10 @@ let gameState = {
     hunger: 0,
     energy: 100,
     health: 100,
-    coins: 100,
-    food: 20,
-    water: 15,
-    medicine: 5,
+    coins: 0,
+    food: 0,
+    water: 0,
+    medicine: 0,
     lastAction: null
 };
 
@@ -30,6 +151,9 @@ function initGame() {
     document.getElementById('loadBtn').addEventListener('click', loadGame);
     
     document.getElementById('dogEmoji').addEventListener('click', playDog);
+    
+    // Initialize quiz
+    displayQuestion();
     
     // Load game if exists
     loadGame();
@@ -355,17 +479,91 @@ function resetGame() {
             hunger: 0,
             energy: 100,
             health: 100,
-            coins: 100,
-            food: 20,
-            water: 15,
-            medicine: 5,
+            coins: 0,
+            food: 0,
+            water: 0,
+            medicine: 0,
             lastAction: null
         };
+        answeredQuestions = new Set();
+        currentQuestionIndex = 0;
         localStorage.removeItem('dogGameState');
         updateDisplay();
+        displayQuestion();
         alert('✅ Game đã được đặt lại!');
     }
 }
 
 // Start game when page loads
 window.addEventListener('DOMContentLoaded', initGame);
+
+// Quiz Functions
+function displayQuestion() {
+    // Find next unanswered question
+    while (answeredQuestions.has(currentQuestionIndex) && currentQuestionIndex < quizQuestions.length) {
+        currentQuestionIndex++;
+    }
+    
+    // Reset to beginning if all answered
+    if (currentQuestionIndex >= quizQuestions.length) {
+        currentQuestionIndex = 0;
+        answeredQuestions.clear();
+    }
+    
+    const question = quizQuestions[currentQuestionIndex];
+    const questionEl = document.getElementById('quizQuestion');
+    const optionsEl = document.getElementById('quizOptions');
+    
+    questionEl.textContent = question.question;
+    optionsEl.innerHTML = '';
+    
+    question.options.forEach((option, index) => {
+        const optionBtn = document.createElement('div');
+        optionBtn.className = 'quiz-option';
+        optionBtn.textContent = option;
+        optionBtn.onclick = () => selectAnswer(index, question);
+        optionsEl.appendChild(optionBtn);
+    });
+    
+    document.getElementById('quizFeedback').classList.remove('show', 'correct', 'incorrect');
+    document.getElementById('nextQuizBtn').style.display = 'none';
+}
+
+function selectAnswer(selectedIndex, question) {
+    const feedbackEl = document.getElementById('quizFeedback');
+    const optionsEl = document.querySelectorAll('.quiz-option');
+    const nextBtn = document.getElementById('nextQuizBtn');
+    
+    // Disable all options
+    optionsEl.forEach(opt => opt.style.pointerEvents = 'none');
+    
+    // Show answer
+    optionsEl[question.correct].classList.add('correct');
+    
+    answeredQuestions.add(currentQuestionIndex);
+    
+    if (selectedIndex === question.correct) {
+        optionsEl[selectedIndex].classList.add('correct');
+        feedbackEl.textContent = `✅ Đúng rồi! +${question.reward} coin`;
+        feedbackEl.className = 'quiz-feedback show correct';
+        gameState.coins += question.reward;
+        updateDisplay();
+    } else {
+        optionsEl[selectedIndex].classList.add('incorrect');
+        feedbackEl.textContent = `❌ Sai rồi! Đáp án đúng: ${question.options[question.correct]}`;
+        feedbackEl.className = 'quiz-feedback show incorrect';
+    }
+    
+    nextBtn.style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    displayQuestion();
+    
+    // Re-enable options
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.style.pointerEvents = 'auto';
+        opt.classList.remove('correct', 'incorrect', 'selected');
+    });
+}
