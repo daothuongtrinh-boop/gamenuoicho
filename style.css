@@ -1,0 +1,375 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    max-width: 900px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.game-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* Dog Container */
+.dog-container {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dog-status {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+}
+
+.dog-status h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.dog-emoji {
+    font-size: 6em;
+    animation: bounce 1s infinite;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes sad {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+.dog-emoji.sad {
+    animation: sad 0.5s;
+}
+
+@keyframes happy {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2) rotate(10deg); }
+    100% { transform: scale(1); }
+}
+
+.dog-emoji.happy {
+    animation: happy 0.5s;
+}
+
+/* Stats Panel */
+.stats-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat label {
+    min-width: 100px;
+    font-weight: 600;
+    color: #333;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 25px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #ddd;
+}
+
+.stat-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.stat-bar.hunger .stat-fill {
+    background: linear-gradient(90deg, #f5576c, #ffa500);
+}
+
+.stat-bar.energy .stat-fill {
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+}
+
+.stat-bar.health .stat-fill {
+    background: linear-gradient(90deg, #FF6B6B, #FF8E72);
+}
+
+.stat span {
+    min-width: 45px;
+    text-align: right;
+    font-weight: 600;
+    color: #667eea;
+}
+
+/* Message Box */
+.message-box {
+    background: #f0f4ff;
+    border-left: 4px solid #667eea;
+    padding: 15px;
+    border-radius: 8px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+#statusMessage {
+    color: #333;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+/* Actions Panel */
+.actions-panel {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #eee;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.feed-btn {
+    background: linear-gradient(135deg, #f5576c, #ffa500);
+}
+
+.water-btn {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.play-btn {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
+
+.sleep-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.pet-btn {
+    background: linear-gradient(135deg, #fa709a, #fee140);
+}
+
+.medicine-btn {
+    background: linear-gradient(135deg, #30cfd0, #330867);
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:active {
+    transform: translateY(-1px);
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Inventory Panel */
+.inventory-panel {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #eee;
+}
+
+.inventory-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    font-weight: 600;
+}
+
+.item span:last-child {
+    color: #667eea;
+    font-size: 1.2em;
+}
+
+/* Shop Panel */
+.shop-panel {
+    grid-column: 2;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #eee;
+}
+
+.shop-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.shop-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+}
+
+.shop-item span:first-child {
+    font-weight: 600;
+    color: #333;
+}
+
+.price {
+    color: #ffa500;
+    font-weight: 600;
+}
+
+.buy-btn {
+    padding: 8px 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+.buy-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.coins-display {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 15px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-radius: 10px;
+    color: white;
+}
+
+/* Control Buttons */
+.control-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 12px 25px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-area {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-panel {
+        grid-column: 1;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .dog-emoji {
+        font-size: 4em;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr;
+    }
+}

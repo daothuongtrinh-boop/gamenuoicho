@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuôi Chó - Virtual Pet Dog Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🐕 Nuôi Chó Ảo 🐕</h1>
+        
+        <div class="game-area">
+            <!-- Dog display -->
+            <div class="dog-container">
+                <div class="dog-status">
+                    <h2 id="dogName">Chó Của Tôi</h2>
+                    <div class="dog-emoji" id="dogEmoji">🐕</div>
+                </div>
+
+                <!-- Stats display -->
+                <div class="stats-panel">
+                    <div class="stat">
+                        <label>Độ Vui Vẻ</label>
+                        <div class="stat-bar">
+                            <div class="stat-fill" id="happinessFill" style="width: 100%"></div>
+                        </div>
+                        <span id="happinessValue">100</span>
+                    </div>
+
+                    <div class="stat">
+                        <label>Độ Đói</label>
+                        <div class="stat-bar hunger">
+                            <div class="stat-fill" id="hungerFill" style="width: 0%"></div>
+                        </div>
+                        <span id="hungerValue">0</span>
+                    </div>
+
+                    <div class="stat">
+                        <label>Năng Lượng</label>
+                        <div class="stat-bar energy">
+                            <div class="stat-fill" id="energyFill" style="width: 100%"></div>
+                        </div>
+                        <span id="energyValue">100</span>
+                    </div>
+
+                    <div class="stat">
+                        <label>Sức Khỏe</label>
+                        <div class="stat-bar health">
+                            <div class="stat-fill" id="healthFill" style="width: 100%"></div>
+                        </div>
+                        <span id="healthValue">100</span>
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div class="message-box">
+                    <div id="statusMessage">Chó của bạn đang khỏe mạnh! 😊</div>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="actions-panel">
+                <h3>Hành Động</h3>
+                <div class="button-group">
+                    <button id="feedBtn" class="action-btn feed-btn" title="Cho chó ăn">🍖 Cho Ăn</button>
+                    <button id="waterBtn" class="action-btn water-btn" title="Cho chó uống nước">💧 Cho Uống</button>
+                    <button id="playBtn" class="action-btn play-btn" title="Chơi với chó">🎾 Chơi Với</button>
+                    <button id="sleepBtn" class="action-btn sleep-btn" title="Cho chó ngủ">😴 Cho Ngủ</button>
+                    <button id="petBtn" class="action-btn pet-btn" title="Vuốt ve chó">✋ Vuốt Ve</button>
+                    <button id="medicineBtn" class="action-btn medicine-btn" title="Cho chó uống thuốc">💊 Uống Thuốc</button>
+                </div>
+            </div>
+
+            <!-- Inventory -->
+            <div class="inventory-panel">
+                <h3>Kho Đồ</h3>
+                <div class="inventory-items">
+                    <div class="item">
+                        <span>🍖 Thức ăn:</span>
+                        <span id="foodCount">20</span>
+                    </div>
+                    <div class="item">
+                        <span>💧 Nước:</span>
+                        <span id="waterCount">15</span>
+                    </div>
+                    <div class="item">
+                        <span>💊 Thuốc:</span>
+                        <span id="medicineCount">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shop -->
+            <div class="shop-panel">
+                <h3>🏪 Cửa Hàng</h3>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <span>🍖 Thức ăn</span>
+                        <span class="price">5 coin</span>
+                        <button class="buy-btn" onclick="buyFood()">Mua</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>💧 Nước</span>
+                        <span class="price">3 coin</span>
+                        <button class="buy-btn" onclick="buyWater()">Mua</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>💊 Thuốc</span>
+                        <span class="price">10 coin</span>
+                        <button class="buy-btn" onclick="buyMedicine()">Mua</button>
+                    </div>
+                </div>
+                <div class="coins-display">
+                    <span>💰 Coins: <strong id="coinCount">100</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control buttons -->
+        <div class="control-buttons">
+            <button id="resetBtn" class="control-btn">🔄 Chơi Lại</button>
+            <button id="saveBtn" class="control-btn">💾 Lưu Game</button>
+            <button id="loadBtn" class="control-btn">📂 Tải Game</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
