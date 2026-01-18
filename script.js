@@ -551,13 +551,19 @@ function selectAnswer(selectedIndex, question) {
         feedbackEl.className = 'quiz-feedback show correct';
         gameState.coins += question.reward;
         updateDisplay();
+        
+        // Auto advance to next question after 2 seconds
+        setTimeout(() => {
+            nextQuestion();
+        }, 2000);
     } else {
         optionsEl[selectedIndex].classList.add('incorrect');
         feedbackEl.textContent = `❌ Sai rồi! Đáp án đúng: ${question.options[question.correct]}`;
         feedbackEl.className = 'quiz-feedback show incorrect';
+        
+        // Show next button for incorrect answers
+        nextBtn.style.display = 'block';
     }
-    
-    nextBtn.style.display = 'block';
 }
 
 function nextQuestion() {
