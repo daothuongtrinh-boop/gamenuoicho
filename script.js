@@ -550,7 +550,7 @@ function selectAnswer(selectedIndex, question) {
         feedbackEl.textContent = `✅ Đúng rồi! +${question.reward} coin`;
         feedbackEl.className = 'quiz-feedback show correct';
         gameState.coins += question.reward;
-        console.log('Coin cập nhật:', gameState.coins, 'Thêm:', question.reward);
+        console.log('Coins hiện tại:', gameState.coins);
         updateDisplay();
         
         // Auto advance to next question after 2 seconds
